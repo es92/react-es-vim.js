@@ -6,6 +6,9 @@ declare var VimCanvas: any;
 import { VimJS } from 'es-vim.js/web/vim_loader.js'
 import VimCanvas from 'es-vim.js/web/vim_canvas_ui.js'
 
+import memoryFilePath from 'es-vim.js/web/vim.js.mem';
+import binaryFilePath from 'es-vim.js/web/vim.js.binary';
+
 import React, { Component } from 'react';
 
 type InitialFsTask = { kind: 'create', path: string, filename: string, contents: string } | 
@@ -40,6 +43,8 @@ export default class Vim extends Component {
 
   componentDidMount() {
     const { initialFile, initialPath, home, onVimFsLoaded, initialFsTask } = this.props;
+
+
     const vimjs = new VimJS();
 
     vimjs.load(start => {
@@ -57,7 +62,7 @@ export default class Vim extends Component {
           oninit: (finishInit) => finishInit()
         })
       );
-    });
+    }, { memoryFilePath, binaryFilePath });
 
   }
 
