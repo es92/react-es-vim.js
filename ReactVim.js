@@ -101,6 +101,7 @@ var Vim = function (_Component) {
       return _react2.default.createElement('canvas', {
         width: 800,
         height: 400,
+        style: { position: 'absolute', width: '100%', height: '100%' },
         tabIndex: '1',
         ref: function ref(r) {
           return _this3.canvas = r;

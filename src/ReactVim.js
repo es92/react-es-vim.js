@@ -68,9 +68,10 @@ export default class Vim extends Component {
 
   render() {
     return (
-      <canvas 
+      <canvas
         width={800} 
         height={400}
+        style={{position: 'absolute', width: '100%', height: '100%' }}
         tabIndex="1" 
         ref={ (r) => this.canvas = r }
       />
