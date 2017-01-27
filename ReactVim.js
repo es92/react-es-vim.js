@@ -65,6 +65,7 @@ var Vim = function (_Component) {
       var _props = this.props,
           initialFile = _props.initialFile,
           initialPath = _props.initialPath,
+          allowExit = _props.allowExit,
           home = _props.home,
           onVimFsLoaded = _props.onVimFsLoaded,
           initialFsTask = _props.initialFsTask;
@@ -76,6 +77,8 @@ var Vim = function (_Component) {
         _this2.runFsTask(vimjs, initialFsTask);
         var canvas = _this2.canvas;
         var vc = new _vim_canvas_ui2.default(vimjs, canvas);
+
+        vimjs.em_vimjs.on('exit', _this2.props.onClose);
 
         var callStart = onVimFsLoaded || function (f) {
           return f();
@@ -91,7 +94,7 @@ var Vim = function (_Component) {
             }
           });
         });
-      }, { memoryFilePath: _vimJs2.default, binaryFilePath: _vimJs4.default });
+      }, { memoryFilePath: _vimJs2.default, binaryFilePath: _vimJs4.default }, allowExit);
     }
   }, {
     key: 'render',

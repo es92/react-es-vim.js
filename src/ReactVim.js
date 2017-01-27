@@ -17,6 +17,7 @@ type InitialFsTask = { kind: 'create', path: string, filename: string, contents:
 type VimProps = {
   initialFile?: string,
   initialPath?: string,
+  allowExit?: boolean,
   home?: string,
   onVimFsLoaded?: (startVim:() => any) => any,
   initialFsTask?: InitialFsTask
@@ -42,7 +43,7 @@ export default class Vim extends Component {
   }
 
   componentDidMount() {
-    const { initialFile, initialPath, home, onVimFsLoaded, initialFsTask } = this.props;
+    const { initialFile, initialPath, allowExit, home, onVimFsLoaded, initialFsTask } = this.props;
 
 
     const vimjs = new VimJS();
@@ -51,6 +52,8 @@ export default class Vim extends Component {
       this.runFsTask(vimjs, initialFsTask);
       const canvas = this.canvas;
       const vc = new VimCanvas(vimjs, canvas);
+
+      vimjs.em_vimjs.on('exit', this.props.onClose);
 
       const callStart = onVimFsLoaded || (f => f());
 
@@ -62,7 +65,7 @@ export default class Vim extends Component {
           oninit: (finishInit) => finishInit()
         })
       );
-    }, { memoryFilePath, binaryFilePath });
+    }, { memoryFilePath, binaryFilePath }, allowExit);
 
   }
 
