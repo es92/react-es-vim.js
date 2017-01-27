@@ -18,6 +18,7 @@ type VimProps = {
   initialFile?: string,
   initialPath?: string,
   allowExit?: boolean,
+  vimrc?: string,
   home?: string,
   onVimFsLoaded?: (startVim:() => any) => any,
   initialFsTask?: InitialFsTask
@@ -43,8 +44,7 @@ export default class Vim extends Component {
   }
 
   componentDidMount() {
-    const { initialFile, initialPath, allowExit, home, onVimFsLoaded, initialFsTask } = this.props;
-
+    const { initialFile, initialPath, allowExit, vimrc, home, onVimFsLoaded, initialFsTask } = this.props;
 
     const vimjs = new VimJS();
 
@@ -61,6 +61,7 @@ export default class Vim extends Component {
         () => start({
           initialFile,
           initialPath,
+          vimrc,
           home,
           oninit: (finishInit) => finishInit()
         })

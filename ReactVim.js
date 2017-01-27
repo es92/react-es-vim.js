@@ -66,6 +66,7 @@ var Vim = function (_Component) {
           initialFile = _props.initialFile,
           initialPath = _props.initialPath,
           allowExit = _props.allowExit,
+          vimrc = _props.vimrc,
           home = _props.home,
           onVimFsLoaded = _props.onVimFsLoaded,
           initialFsTask = _props.initialFsTask;
@@ -88,6 +89,7 @@ var Vim = function (_Component) {
           return start({
             initialFile: initialFile,
             initialPath: initialPath,
+            vimrc: vimrc,
             home: home,
             oninit: function oninit(finishInit) {
               return finishInit();
