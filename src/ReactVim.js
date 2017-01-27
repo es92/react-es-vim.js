@@ -47,13 +47,19 @@ export default class Vim extends Component {
     const { initialFile, initialPath, allowExit, vimrc, home, onVimFsLoaded, initialFsTask } = this.props;
 
     const vimjs = new VimJS();
+    this._vimjs = vimjs;
 
     vimjs.load(start => {
       this.runFsTask(vimjs, initialFsTask);
       const canvas = this.canvas;
       const vc = new VimCanvas(vimjs, canvas);
 
-      vimjs.em_vimjs.on('exit', this.props.onClose);
+      vimjs.em_vimjs.on('exit', () => {
+        if (!this._closed)
+          this.props.onClose();
+      });
+
+      window.vimjs = vimjs
 
       const callStart = onVimFsLoaded || (f => f());
 
@@ -68,6 +74,11 @@ export default class Vim extends Component {
       );
     }, { memoryFilePath, binaryFilePath }, allowExit);
 
+  }
+
+  componentWillUnmount() {
+    this._closed = true;
+    this._vimjs.destroy();
   }
 
   render() {

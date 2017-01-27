@@ -73,13 +73,18 @@ var Vim = function (_Component) {
 
 
       var vimjs = new _vim_loader.VimJS();
+      this._vimjs = vimjs;
 
       vimjs.load(function (start) {
         _this2.runFsTask(vimjs, initialFsTask);
         var canvas = _this2.canvas;
         var vc = new _vim_canvas_ui2.default(vimjs, canvas);
 
-        vimjs.em_vimjs.on('exit', _this2.props.onClose);
+        vimjs.em_vimjs.on('exit', function () {
+          if (!_this2._closed) _this2.props.onClose();
+        });
+
+        window.vimjs = vimjs;
 
         var callStart = onVimFsLoaded || function (f) {
           return f();
@@ -97,6 +102,12 @@ var Vim = function (_Component) {
           });
         });
       }, { memoryFilePath: _vimJs2.default, binaryFilePath: _vimJs4.default }, allowExit);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this._closed = true;
+      this._vimjs.destroy();
     }
   }, {
     key: 'render',
