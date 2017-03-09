@@ -78,7 +78,9 @@ export default class Vim extends Component {
 
   componentWillUnmount() {
     this._closed = true;
-    this._vimjs.destroy();
+    setTimeout(() => {
+      this._vimjs.destroy();
+    }, 0);
   }
 
   render() {

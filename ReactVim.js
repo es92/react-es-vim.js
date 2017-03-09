@@ -106,13 +106,17 @@ var Vim = function (_Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
+      var _this3 = this;
+
       this._closed = true;
-      this._vimjs.destroy();
+      setTimeout(function () {
+        _this3._vimjs.destroy();
+      }, 0);
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return _react2.default.createElement('canvas', {
         width: 800,
@@ -120,7 +124,7 @@ var Vim = function (_Component) {
         style: { position: 'absolute', width: '100%', height: '100%' },
         tabIndex: '1',
         ref: function ref(r) {
-          return _this3.canvas = r;
+          return _this4.canvas = r;
         }
       });
     }
