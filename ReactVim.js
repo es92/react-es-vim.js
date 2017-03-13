@@ -20,6 +20,8 @@ var _vimJs3 = require('es-vim.js/web/vim.js.binary');
 
 var _vimJs4 = _interopRequireDefault(_vimJs3);
 
+require('./source-code-pro.css');
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);

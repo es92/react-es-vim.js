@@ -9,6 +9,8 @@ import VimCanvas from 'es-vim.js/web/vim_canvas_ui.js'
 import memoryFilePath from 'es-vim.js/web/vim.js.mem';
 import binaryFilePath from 'es-vim.js/web/vim.js.binary';
 
+import "./source-code-pro.css"
+
 import React, { Component } from 'react';
 
 type InitialFsTask = { kind: 'create', path: string, filename: string, contents: string } | 
