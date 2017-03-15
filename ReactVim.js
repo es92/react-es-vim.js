@@ -53,7 +53,7 @@ var Vim = function (_Component) {
           vimjs.FS.writeFile(initialFsTask.path + '/' + initialFsTask.filename, initialFsTask.contents);
           return;
         case 'remote':
-          vimjs.load_remotefs(initialFsTask.serverAddr);
+          vimjs.load_remotefs(initialFsTask.config);
           return;
         default:
           throw function (impossible) {}(initialFsTask.kind);

@@ -14,7 +14,7 @@ import "./source-code-pro.css"
 import React, { Component } from 'react';
 
 type InitialFsTask = { kind: 'create', path: string, filename: string, contents: string } | 
-                     { kind: 'remote', serverAddr: string }
+                     { kind: 'remote', config: any }
 
 type VimProps = {
   initialFile?: string,
@@ -38,7 +38,7 @@ export default class Vim extends Component {
       vimjs.FS.writeFile(`${initialFsTask.path}/${initialFsTask.filename}`, initialFsTask.contents);
       return;
     case 'remote':
-      vimjs.load_remotefs(initialFsTask.serverAddr);
+      vimjs.load_remotefs(initialFsTask.config);
       return;
     default: 
       throw ((impossible: empty) => {})(initialFsTask.kind);
