@@ -74,13 +74,13 @@ var Vim = function (_Component) {
           initialFsTask = _props.initialFsTask;
 
 
-      var vimjs = new _vim_loader.VimJS();
+      var vimjs = new _vim_loader.VimJS_WW();
       this._vimjs = vimjs;
 
       vimjs.load(function (start) {
         _this2.runFsTask(vimjs, initialFsTask);
         var canvas = _this2.canvas;
-        var vc = new _vim_canvas_ui2.default(vimjs, canvas);
+        new _vim_canvas_ui2.default(vimjs, canvas);
 
         vimjs.em_vimjs.on('exit', function () {
           if (!_this2._closed) _this2.props.onClose();

@@ -1,9 +1,8 @@
 // @flow
 
 declare var VimJS: any;
-declare var VimCanvas: any;
 
-import { VimJS } from 'es-vim.js/web/vim_loader.js'
+import { VimJS_WW } from 'es-vim.js/web/vim_loader.js'
 import VimCanvas from 'es-vim.js/web/vim_canvas_ui.js'
 
 import memoryFilePath from 'es-vim.js/web/vim.js.mem';
@@ -48,13 +47,13 @@ export default class Vim extends Component {
   componentDidMount() {
     const { initialFile, initialPath, allowExit, vimrc, home, onVimFsLoaded, initialFsTask } = this.props;
 
-    const vimjs = new VimJS();
+    const vimjs = new VimJS_WW();
     this._vimjs = vimjs;
 
     vimjs.load(start => {
       this.runFsTask(vimjs, initialFsTask);
       const canvas = this.canvas;
-      const vc = new VimCanvas(vimjs, canvas);
+      new VimCanvas(vimjs, canvas);
 
       vimjs.em_vimjs.on('exit', () => {
         if (!this._closed)
